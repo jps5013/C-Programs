@@ -1,0 +1,101 @@
+#include <cs50.h>
+#include <stdio.h>
+
+
+int main(void)
+{
+    int user_input;
+    
+    /* Getting User Input
+    by defining my variable outside of the loop, v input is accessable
+    in entire program. if I declared it in the body of the loop, 
+    it would only be accesible there.
+    I will need to use input again in the building of the pyramid*/
+    do
+    {
+        printf("Height:");
+        user_input = GetInt();
+    }
+    while(user_input > 23 || user_input < 0);    
+    
+    /*
+    example user inputs 1. outer loop runs 1 iteration of row = 0, 
+    or 1 instance of /n. However, Before this next line is printed 
+    the input must be ran through the inner loop. 
+    The inner loop runs 2 iterations. 
+    When column = 0 body dictates to print 1 hash, when column = 1 
+    (or column = row +1 because row was 0 based on variable input) 
+    the second hash is printed. 
+    now we exit the inner loop and print that next line. 
+    We go back into the inner loop if the user input was larger.
+    if input was 2 column record id 0 prints ## 
+    then exits and outer loop prints /n. 
+    we re-enter inner loop b/c print ### for column 0,1,2,
+    and then print the second /n for row 1. 
+    then the program finishes because the user inputted 2 
+    and row can go any further. 
+    */
+    /*
+    Space is trickier. say user inputs 5. first iteration
+    row = 0. so we would get 5 - (0 + 1) = 4 spaces
+    then exit and print hashes then exit and
+    print /n. Second iteration we get 5 - 1 + 1 = 3
+    spaces... third iteration we get 5 - 2 + 1 = 2
+    spaces...4th iteration we get 5 - 3 + 1 = 1 spaces.
+    Loop ends now because 5- 4 + 1 = 5 and the condition
+    of space being less than user input - RH + 1
+    is no longer true. so now the hash inner loop
+    is ran until that expires. lastly the outer loop
+    runs until it expires.
+    */
+    
+    for(int r_height = 0; r_height < user_input; r_height++)   
+    /** 
+     * say user input is 5   
+     * 3.0 1st iteration- row height = 0, we take this initial value and move through
+     * inner loops starting at 1.0 then 2.0. once they are executed, we execute the body of outer loop (3.0) 
+     * row height = 0, is 0 < 5? yes print next line. now move back into inner loops with
+     r_height value = 1
+     * 3.1 now r_height =1  is 1 < 5? yes, print next line then move back into inner loops
+     * etc etc.
+     */ 
+    {
+        for(int c_space = 0; c_space < (user_input - (r_height + 1)); c_space++)
+        /**
+         * 1.0 Say user input is 5. this loop says initialize c space to 0 on 
+         * 1st iteration.   is 0 < 5 - (0 + 1)? Yes so print a space
+         * 2nd iteration.   is 1 < 5 - (0 + 1)? Yes Print 2nd space
+         * Third iteration. is 2 < 5 - (0 + 1)? Yes Print 3rd space
+         * 4th iteration.   is 3 < 5 - (0 + 1)? Yes print 4th space
+         * 5th iteration.   is 4 < 5 - (0 + 1)? No, so this iteration doesnt happen
+         * We end with 4 space and move to second loop.
+         * 1.1 1st iteration is 0 < 5 - (1 + 1)? Yes print a space. So on and so forth
+         * 2nd iteration is 1 < 5 - (1 + 1)? Yes Print 2nd space
+         * 3rd iteration is 2 < 5 - (1 + 1)? 
+         * Yes Print 3rd space and exit to hash loop
+         * like above, and we see we get 3 spaces this time 
+         */
+        
+        {
+            printf(" ");
+        }
+       
+        for(int c_hash = 0; c_hash < (r_height + 2); c_hash++)
+        /** 
+         *2.0 Now we have exited space loop and enter hash loop
+         *1st iteration.   is 0 < 0 + 2? Yes Print 1 Hash
+         *2nd iteration.   is 1 < 0 + 2? Yes Print 2nd hash
+         *3rd iteration.   is 2 < 0 + 2? No so this iteration doesnt happen.
+         *We exit this inner loop and go to outer row loop.
+         *2.1 1st iteration is 0 < 1 + 2? yes print 1 hash'
+         *2nd iteration. is 1 < 1 +2? yes print 2nd hash
+         *3rd iteration. is 2 < 1 +2? yes print 3rd hash. exit to outer loop.
+         */
+        {                       
+            printf("#");
+        }
+        
+        printf("\n");        
+    } 
+        
+}
