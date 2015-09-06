@@ -1,0 +1,57 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+
+
+int main(void)
+
+{
+   float UserFloat;
+   int TransactionTracker = 0;
+   int Quarter = 25;
+    
+   int Dime    = 10;
+   int Nickel  =  5;
+   int Penny   =  1;
+    
+    // initiate user input loop to ensure positive input
+    do
+    {
+        printf("o hai! How much change is owed?\n");
+        UserFloat = GetFloat();          
+    }
+    while(UserFloat < 0);
+    
+    int UserInt = (round(UserFloat * 100));
+    // printf("%i\n",UserInt);
+    
+    
+    // Starting the decrementation fromuser int to 0 with quarter  
+    
+    while(UserInt >= 0)
+    {
+        if(UserInt >= Quarter)
+        {
+            UserInt = (UserInt - Quarter);
+            TransactionTracker = (TransactionTracker + 1);
+        }
+    
+        else if(UserInt >= Dime || UserInt < Quarter)
+        {
+            UserInt = (UserInt - Dime);
+            TransactionTracker = (TransactionTracker + 1);
+        }  
+    
+        else if(UserInt >= Nickel || UserInt < Dime)
+        {
+            UserInt = (UserInt - Nickel);
+            TransactionTracker = (TransactionTracker + 1);
+        }
+        else if(UserInt >= Penny || UserInt < Nickel)
+        {
+            UserInt = (UserInt - Penny);
+            TransactionTracker = (TransactionTracker + 1);
+        }
+    }
+    printf("%d\n",TransactionTracker);
+}
