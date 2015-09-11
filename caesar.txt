@@ -4,12 +4,12 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+
 int main(int argc, string argv[])
 {
     // initiziling command line key at first entry post ./program
     
-    int key = atoi(argv[1]);
-
+    int key = atoi(argv[1]);    
     /** condition for when user doesn't comply b/c 
      *  count must be 2 if user is compliant
      */
@@ -22,27 +22,31 @@ int main(int argc, string argv[])
     {
         // printf("Give me your bag\n");
         string plaintext = GetString();
-        
-       
+               
         for(int i = 0, n = strlen(plaintext); i < n ;i++)
         {
-             if(isalpha(plaintext[i]))
-             {
-                char cipher = (plaintext[i] + key) % 26;
-                /* if plainttext[i] + key < 26, you can store 0
-                 * items of size 26 in a memory space of size 25
-                 * so there is still 25 spaces of memory remaining
-                 *so we still increase by 25
-                 * if plaintext[i] + key of 26, will wrap around to
-                 *remainder value i.e 27 % 26 = 1 + ex p[i] = 'a' or 97, so will return
-                 *'b' or 98, as it should
+            if(isalpha(plaintext[i]))
+            {
+                if(islower(plaintext[i]))
+                {                            
+                    int cipher= plaintext[i] + (plaintext[i] + key) % 26;
+                    printf("%c", cipher);   
+                }
+                else         
+                {
+                    int cipher= plaintext[i] + (plaintext[i] + key) % 26;
+                    printf("%c", cipher);   
+                }
+                /*                  * 
+                 * ex h = 104 k = 1 and i = 0. 104 +105%26.. 104 + 1 = 105 = i
+                 *but every iteration the gap increases by one...
+                 * ex h = 104 k = 27 and i = 0 104 + 131 % 26.. 104 + 1 =105 = i 
+                 *but every iteration the gap increases by one...
                  */
-                printf("%c",cipher);
-             }
+            }        
             else
             {
                 printf("%c",plaintext[i]);
-                
             }
         }
         printf("\n");    
@@ -50,3 +54,9 @@ int main(int argc, string argv[])
     return 0; 
 }
 
+
+    
+
+    
+    
+    
