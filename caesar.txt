@@ -22,20 +22,30 @@ int main(int argc, string argv[])
     {
         // printf("Give me your bag\n");
         string plaintext = GetString();
-               
+        string cipher = NULL; 
+        // why cant I just declare string cipher;
+        // and then define it later?
+        
+              
         for(int i = 0, n = strlen(plaintext); i < n ;i++)
         {
             if(isalpha(plaintext[i]))
             {
                 if(islower(plaintext[i]))
-                {                            
-                    int cipher= plaintext[i] + (plaintext[i] + key) % 26;
-                    printf("%c", cipher);   
+                {                          
+                    cipher[i] =((plaintext[i] - 97) + key) % 26;
+                    printf("%c", cipher[i]);  
+                    /** why not good? say plaintext[i] = h
+                     * 104 - 97 = 7, which is where i want
+                     * h to be if lowercase alphabet starts
+                     * at a = 0. if key is 1, 7 + 1 % 26 = 8 or i.
+                     **/
+                     
                 }
-                else         
+                else if(isupper(plaintext[i]))         
                 {
-                    int cipher= plaintext[i] + (plaintext[i] + key) % 26;
-                    printf("%c", cipher);   
+                    cipher[i] =((plaintext[i] - 65) + key) % 26;
+                    printf("%c", cipher[i]);   
                 }
                 /*                  * 
                  * ex h = 104 k = 1 and i = 0. 104 +105%26.. 104 + 1 = 105 = i
@@ -56,7 +66,6 @@ int main(int argc, string argv[])
 
 
     
-
     
     
     
