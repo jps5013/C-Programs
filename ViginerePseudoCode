@@ -1,0 +1,22 @@
+# CS50
+1.	If argument count isn’t 2
+  a.	Yell @ user, return 1
+2.	Store ARGV[2] into KEY
+3.	Check/ loop over each char in key
+  a.	If any char isn’t alpha, (== false)
+    i.	Yell @ user return 1
+  b.	Else
+4.	Prompt User for string, store in plaintext
+  a.	Check/ loop over plaintext
+    i.	If plaintext is alphabetical
+          -	If plaintext is lowercase
+              	Loop over the key
+                Encipher somehow with the correct char of the key
+          -	If plaintext is uppercase
+              	Loop over the key
+              	Encipher somehow with the correct char of the key
+    ii.	ELSE
+          -	Print out the char of original plaintext
+5.	Print out next line
+6.	Return 0
+7.	Exit Program and go to the ball.
