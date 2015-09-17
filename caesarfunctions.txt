@@ -30,7 +30,7 @@ int main(int argc, string argv[])
         {
             if(isalpha(plaintext[i]))
             {
-                char cipher = OffsettoASCII((ASCIItoOffset(plaintext[i]) + key % 26), plaintext[i]);
+                char cipher = OffsettoASCII(ASCIItoOffset(plaintext[i] + key) % 26, plaintext[i]);
                 printf("%c", cipher);  
             }               
             else
@@ -79,5 +79,6 @@ char OffsettoASCII(int x, char forCase)
 }
 
   
+    
     
     
