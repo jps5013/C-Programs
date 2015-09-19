@@ -50,8 +50,13 @@ int main(int argc, string argv[])
   
      for(int i = 0; i < plen ;i++)
      {
+        //creating a new counter replicated from i
+        int j = i
         if(isalpha(plaintext[i]))
         { 
+            // setting in motion the j = j + 1 incrementation, but since
+            // it is withing the if isalpha scope, should only incremenet if plaintext[i] is alpha?
+            j++;   
             // encipher algorithm = c[j] = (p[i] + k[j]) % 26
             // set p[i] to 0 using ASCIItoOffset Funtion and store in offset.
             char offset = ASCIItoOffset(plaintext[i]);
