@@ -60,8 +60,7 @@ int main(int argc, string argv[])
         
         if(isalpha(plaintext[i]))
         { 
-            // this counter only incremenets if isalpha(plaintext[i])
-            // counter that increments only if isalpha(p[i])
+            // create acounter that increments only if isalpha(plaintext[i])
             /**say p[i] = 'a'. a is fed into ASCIItoOffset. this function
              * uses int islower(int c), so it reads the input of 'a'
              * as an int and returns an int. so this means the new variable
@@ -69,7 +68,7 @@ int main(int argc, string argv[])
              **/
              // cipher formula = c[i] =(p[i] + k[j]) % 26
             int offset = ASCIItoOffset(plaintext[i]);
-            /** now converted p[i] to a = 0, b = 1 etc based logic
+            /** now converted p[i] to offset index values.
              *  so below line satisfies c[i] = (p[i] + k[j])
              **/
             //need to convert key from ASCII value to offset index as well!
@@ -77,7 +76,7 @@ int main(int argc, string argv[])
             /** we want to incremenet j after the first time we use it, not before
              *  so j++ must go here. otherwise, j would already be 1 when it should be 0
              *  ex key = ab, klen ==2. k[0 % 2] = k[0] = a, but if increment before
-             *  program will spiot out k [1 % 2] = k[1] or b first!
+             *  program will spit out k [1 % 2] = k[1] or b first!
              *  tested hhh h as plaintext and above is true.
              **/
             j++;
