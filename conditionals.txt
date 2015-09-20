@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <math.h>
 
+/**
+ * Program determines least amount of coins a cashier could return to you
+ * based on the dollar amount tendered the cashier.
+ **/
 
 int main(void)
 
