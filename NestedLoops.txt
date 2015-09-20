@@ -1,6 +1,11 @@
 #include <cs50.h>
 #include <stdio.h>
 
+/**
+ * Builds a right aligned pyramid of hashes based on user input, similar to the pyramid
+ * at the end of a Mario level.
+ **/
+
 
 int main(void)
 {
