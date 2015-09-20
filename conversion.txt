@@ -5,6 +5,11 @@
 #include <string.h>
 #include <ctype.h>
 
+/**
+* Program that returns the initials of a name
+* based on user input.
+**/
+
 int main(void)
 {
     // Get name and store in name
