@@ -46,12 +46,14 @@ int main(int argc, string argv[])
          *  this is a problem because i is not regulated by the isalpha condition
          *  as I want j to be, so even though j++ is in the isalpha block
          *  this condition will be negated.
-         *  so say plaintext = h i i = 0 = h, j set to i to j = 0. i = 2 = ASCII32
-         *  we set j = i, so it increments to 2 before the is alpha j ++ happens
-         *  tottally negates my logic of j++ being within isalpha branch.  
-         *  I tested by setting j = i and removing the j++, and above logic validated.
+         *  so say plaintext = h i (or h ASCII32 i) i = 0 = h, j set to i so j = 0. i = 2 = ASCII32
+         *  we have set j = i, so it increments to 2 before the is alpha j ++ happens, and 
+         *  the algorithm uincremenet j on a space char, which is undesired.
+         *  THis tottally negates my logic of j++ being within isalpha branch.  
+         *  I tested by setting j = i and removing the j++, and above logic validated
+         *  as j still incremeneted with i.
          *
-         * SOLUTION- set both incrementation variable, i and j, to 0 within ths for loop
+         * SOLUTION- set both incrementation variable, i and j, to 0 within the for loop.
          * this ensures both will increment. however, i increments regardless of isalpha
          * and j incremenets only within the isalpha branch!
          **/
