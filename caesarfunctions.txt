@@ -3,7 +3,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
-
+/**
+ * Encryption program that rotates each alphabetic character
+ * in a message by the key given in the command line arugment
+ * Must make key wrap around back to 0 if user enter a key over 26
+ **/
 int ASCIItoOffset(int c);
 char OffsettoASCII(int x, char forCase);
 
