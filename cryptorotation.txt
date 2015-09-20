@@ -5,19 +5,20 @@
 #include <stdlib.h>
 
 char ASCIItoOffset(char c);
-char OffsettoASCII(char x, char forCase);
+char OffsettoASCII(int x, char forCase);
 
 
 int main(int argc, string argv[])
-{    
+{   
+// taking care of not 2 arguments 
     if(argc != 2)
     {
         printf("You've been a very bad boy!\n");
         return 1;
     }
-    // not 2 arguments accounted for
-    string key = (argv[1]);
-    
+   
+    string key = argv[1];
+// taking care of !isalpha(key)    
     for(int j = 0, n = strlen(key); j < n ;j++)
     {
         if(!isalpha(key[j]))
@@ -26,50 +27,47 @@ int main(int argc, string argv[])
             return 1;
         }
     }    
-    // non alpha chars in key accounted for
     
-    //now set variables needed in program.   
+    //declaring variables needed in program  
     string plaintext = GetString();
     int klen = strlen(key);
-    /**not sure if i really need plen, I think i can just use strlen(plaintext)
-     *
-     */ as I only need this value within my if isalpha branch. 
-    int plen = strlen(plaintext);
+    // don't need plen, as only used in for loop below, but doesn't hurt
+    int plen = strlen(plaintext);    
    
     /**
      * what I want to do is implement keyindex = jth char % klen and use that as the key index
      * within the is alpha block. this will ensure the key only incrments for alpha chars
-     * say key is boo, klen = 3. we are at k[0] 0% 3 = 0 so we encipher with k[0]
-     * k[2] = 2 % 3 so k[2] will print
-     * 
-     * so  0 % 5 prints k[0] 
-     *if klen = 5, keyindex[5] will be the key[0] so in effect wrapping around  
-     *
-     *
      */
   
      for(int i = 0; i < plen ;i++)
      {
-        //creating a new counter replicated from i
-        int j = i
+        //declare a new variable that is another counter
+        /** int j = i will set j to be whatever i is at the start of every loop
+         *  this is a problem because i is not regulated by the isalpha condition
+         *  as I want j to be, so even though j++ is in the isalpha block
+         *  this condition will be negated.
+         *  so say plaintext = h i i = 0 = h, j set to i to j = 0. i = 2 = ASCII32
+         *  we set j = i, so it increments to 2 before the is alpha j ++ happens
+         *  tottally negates my logic of j++ being within isalpha branch.  
+         **/
+        int j = i;
         if(isalpha(plaintext[i]))
         { 
-            // setting in motion the j = j + 1 incrementation, but since
-            // it is withing the if isalpha scope, should only incremenet if plaintext[i] is alpha?
-            j++;   
-            // encipher algorithm = c[j] = (p[i] + k[j]) % 26
-            // set p[i] to 0 using ASCIItoOffset Funtion and store in offset.
-            char offset = ASCIItoOffset(plaintext[i]);
-            // i % klen will ensure j wraps around
-            /* say klen = 3 and plen = 10
-             * k[ 0 % 3] = k[0], k[1%3] = k[1], k[2 % 3] = k[2] k[3 % 3] = k[0]
-             * k[4 % 3] = k[1] so wrap around key works successfully.
-             * so to me k[j] should be the k[ith char of plaintext % klen]
-             */
-             // replave value of offset with offset + k[j]
-             // so no we have c[j] = (p[i] + k[j])
-            offset += key[i % klen];
-            // now we have c[j] = (p[i] + k[j])% 26
+            // this counter only incremenets if isalpha(plaintext[i])
+            // j++;
+            // counter that increments only if isalpha(p[i])
+            /**say p[i] = 'a'. a is fed into ASCIItoOffset. this function
+             * uses int islower(int c), so it reads the input of 'a'
+             * as an int and returns an int. so this means the new variable
+             * offset is actually of type int, so must declare it in next line as such.
+             **/
+             // cipher formula = c[i] =(p[i] + k[j]) % 26
+            int offset = ASCIItoOffset(plaintext[i]);
+            /** now converted p[i] to a = 0, b = 1 etc based logic
+             *  so below line satisfies c[i] = (p[i] + k[j])
+             **/
+            offset += key[j % klen];
+            // below line satisfies the % 26 portion of c[i] = (p[i] + k[j])% 26
             offset %= 26;
             // now we take that value and convert it back to ASCII for printing.
             char cipher = OffsettoASCII(offset, plaintext[i]);
@@ -100,7 +98,7 @@ char ASCIItoOffset(char c)
     return offset;
 }
 
-char OffsettoASCII(char x, char forCase)
+char OffsettoASCII(int x, char forCase)
 {   
     int reset; 
     if(islower(forCase))
