@@ -4,6 +4,12 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+/**
+ * Encrypts a message with a key given by the user in the second command line argument
+ * utilize functions in this version to offset the ASCII char index to 0 base.
+ *
+ **/
+
 /** preface, i am going back to caesar to try and make the functions
   * before I try to make them in vigenere
   */
