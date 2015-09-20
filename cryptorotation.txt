@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 /**
- * More complex enciphering program. enciper message by each letter
+ * More complex vigenere enciphering program. enciper message by each letter
  * in the alphabetix key input by the user in the second command line argument
  * most only increase the key index if the character in the user text is alphabetic.
  **/
