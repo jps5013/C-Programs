@@ -38,8 +38,8 @@ int main(int argc, string argv[])
      * what I want to do is implement keyindex = jth char % klen and use that as the key index
      * within the is alpha block. this will ensure the key only incrments for alpha chars
      */
-  
-     for(int i = 0; i < plen ;i++)
+     
+     for(int i = 0, j = 0; i < plen ;i++)
      {
         //declare a new variable that is another counter
         /** int j = i will set j to be whatever i is at the start of every loop
@@ -49,12 +49,16 @@ int main(int argc, string argv[])
          *  so say plaintext = h i i = 0 = h, j set to i to j = 0. i = 2 = ASCII32
          *  we set j = i, so it increments to 2 before the is alpha j ++ happens
          *  tottally negates my logic of j++ being within isalpha branch.  
+         *  I tested by setting j = i and removing the j++, and above logic validated.
+         *
+         * SOLUTION- set both incrementation variable, i and j, to 0 within ths for loop
+         * this ensures both will increment. however, i increments regardless of isalpha
+         * and j incremenets only within the isalpha branch!
          **/
-        int j = i;
+        
         if(isalpha(plaintext[i]))
         { 
             // this counter only incremenets if isalpha(plaintext[i])
-            // j++;
             // counter that increments only if isalpha(p[i])
             /**say p[i] = 'a'. a is fed into ASCIItoOffset. this function
              * uses int islower(int c), so it reads the input of 'a'
@@ -66,7 +70,15 @@ int main(int argc, string argv[])
             /** now converted p[i] to a = 0, b = 1 etc based logic
              *  so below line satisfies c[i] = (p[i] + k[j])
              **/
-            offset += key[j % klen];
+            //need to convert key from ASCII value to offset index as well!
+            offset += ASCIItoOffset(key[j % klen]);
+            /** we want to incremenet j after the first time we use it, not before
+             *  so j++ must go here. otherwise, j would already be 1 when it should be 0
+             *  ex key = ab, klen ==2. k[0 % 2] = k[0] = a, but if increment before
+             *  program will spiot out k [1 % 2] = k[1] or b first!
+             *  tested hhh h as plaintext and above is true.
+             **/
+            j++;
             // below line satisfies the % 26 portion of c[i] = (p[i] + k[j])% 26
             offset %= 26;
             // now we take that value and convert it back to ASCII for printing.
@@ -111,3 +123,7 @@ char OffsettoASCII(int x, char forCase)
     }
     return reset;
 }
+
+  
+    
+    
