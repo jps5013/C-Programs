@@ -17,19 +17,16 @@ int main(void)
     while(input < 0);
     int cents = round(input * 100);
    
-   // need a change counter to keep track of coins. 
-   // the division portion will give u the count of each coin
-   //b/c cents is an int, it will truncate non full matches to the 
-   //integer value, so 4.04 coins automatically become 4
-   //then we need the remainder so we use modulo before dividing
-   //the remainder by the next coin. if your input is smaller than the coin
-   // the division will turncate to 0 a your result will be a decimal
-   //and modulo will return your starting value
-   //ie 25 mod 46 = 25
-   
-   
+// the division portion will give u the count of each coin
+// b/c cents is an int, it will truncate non complete division 
+// to the integer value, so 4.04 coins automatically become 4
+// then we need the remainder so we use modulo before dividing
+// cents by the next coin. if your input is smaller 
+// than the current coin, your result would be a decimal value
+// and the division will truncate to 0
+// and modulo will return your starting value
+// ie 25 mod 46 = 25
 //   46 cents
-
     quarters = cents / 25;
     // quarters = 1.84. quarters is an int so truncates to 1
     cents = cents % 25;
