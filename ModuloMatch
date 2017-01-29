@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+int main(void)
+{
+    float input;
+    int quarters;
+    int dimes; 
+    int nickels; 
+    int pennies;
+    do
+    {
+    printf("Gimme da Loot!\n") ;
+    input = get_float();
+    }
+    while(input < 0);
+    int cents = round(input * 100);
+   
+   // need a change counter to keep track of coins. 
+   // the division portion will give u the count of each coin
+   //b/c cents is an int, it will truncate non full matches to the 
+   //integer value, so 4.04 coins automatically become 4
+   //then we need the remainder so we use modulo before dividing
+   //the remainder by the next coin. if your input is smaller than the coin
+   // the division will turncate to 0 a your result will be a decimal
+   //and modulo will return your starting value
+   //ie 25 mod 46 = 25
+   
+   
+//   46 cents
+
+    quarters = cents / 25;
+    // quarters = 1.84. quarters is an int so truncates to 1
+    cents = cents % 25;
+    // cents = 21
+    dimes = cents / 10;
+    //dimes = 2.1
+    cents = cents % 10;
+    // cents = 1
+    nickels = cents / 5;
+    // 1 / 5 = 0.2 so 0
+    cents = cents % 5;
+    // cents = 1
+    pennies = cents;
+    // pennies = 1
+    cents = pennies % 1;
+    // cents = 0
+    printf("%i\n", quarters + dimes + nickels + pennies);
+}    
+  
