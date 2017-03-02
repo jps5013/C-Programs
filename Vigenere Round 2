@@ -32,7 +32,7 @@ int main(int argc, string argv[])
       plaintext = get_string();
     //   for(int i = 0, n = strlen(plaintext); i < n; i++)   
     // {
-    //     // convert everything to lowercase value and - 65 to get to its 0 index value
+    //     // convert everything to lowercase value and - 97 to get to its 0 index value
     //     plaintext[i] = tolower(plaintext[i]) - 97;
     //     printf("%d\n",plaintext[i]);
     //     eprintf("i is now %i\n", i);
@@ -50,7 +50,7 @@ string ASCIIconversion(string s)
 {
     for(int i = 0, n = strlen(s); i < n; i++)   
     {
-        // convert everything to lowercase value and - 65 to get to its 0 index value
+        // convert everything to lowercase value and - 97 to get to its 0 index value
         s[i] = tolower(s[i]) - 97;
         // printf("%d\n",s[i]);
         // eprintf("i is now %i\n", i);
