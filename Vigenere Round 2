@@ -1,0 +1,59 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+string ASCIIconversion(string s);
+
+int main(int argc, string argv[])
+{
+    // argc increments from 0. ./<program_name> = argc0, next string = argc 1, but 2 total arguments
+    // quit program if arguments !=2
+    string key = argv[1];
+    string plaintext;
+    
+    if(argc !=2)
+    {
+        printf("ERROR\n");
+        return 1;
+    }
+    //iterate over all chars in argv[1]
+    // if any arent letters, quit program
+    for(int i = 0, n = strlen(key); i < n; i++)
+    {
+        // eprintf("i is now %i\n", i);
+        if(!isalpha(key[i]))
+        {
+           printf("ERROR\n");
+           return 1;
+        }
+    }
+    
+      plaintext = get_string();
+    //   for(int i = 0, n = strlen(plaintext); i < n; i++)   
+    // {
+    //     // convert everything to lowercase value and - 65 to get to its 0 index value
+    //     plaintext[i] = tolower(plaintext[i]) - 97;
+    //     printf("%d\n",plaintext[i]);
+    //     eprintf("i is now %i\n", i);
+    // }
+     ASCIIconversion(plaintext);
+     printf("plaintext: %s\n", plaintext);
+    
+    return 0;
+}
+
+
+// control error: The compiler cannot tell from that code if the function will ever reach the end and still return something. 
+// To make that clear, replace the last else if(...) with just else.
+string ASCIIconversion(string s)
+{
+    for(int i = 0, n = strlen(s); i < n; i++)   
+    {
+        // convert everything to lowercase value and - 65 to get to its 0 index value
+        s[i] = tolower(s[i]) - 97;
+        // printf("%d\n",s[i]);
+        // eprintf("i is now %i\n", i);
+        }
+    return s;
+}
